@@ -1,4 +1,4 @@
-# configure the database for testing?
+# configure the database for testing
  DB url is already set for local machine, make sure mongodb service is running on your local machine
 ## For this you will need 2 terminal windows.
 

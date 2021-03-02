@@ -44,7 +44,7 @@ class Dashboard extends Component {
   async componentDidUpdate(prevProps, prevState) {
     const { auth } = this.props;
     const { user } = auth && auth;
-    if (user) {
+    /* if (user) {
       await this.props.getremoveEvents(user._id);
     }
     if (prevProps.r_events != this.props.r_events) {
@@ -52,7 +52,7 @@ class Dashboard extends Component {
       await this.getEvents();
 
       this.setState({ removedevents: r_events });
-    }
+    } */
   }
   async changeShopStatus(status) {
     await this.props.changeShopStatus(status);
@@ -71,13 +71,13 @@ class Dashboard extends Component {
   };
 
   getfilteredEvents = (currenWeekEvents) => {
-    const { r_events } = this.props;
+    /* const { r_events } = this.props;
     const { remove_arr } = r_events && r_events;
     var filteredEvents =
       currenWeekEvents &&
       currenWeekEvents.filter((a) => remove_arr && !remove_arr.includes(a._id));
 
-    return filteredEvents;
+    return filteredEvents; */
   };
   getcurrentdaysEvents = (updatedEvents, currentdate) => {
     var currenDayEvents =
