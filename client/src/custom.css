@@ -26,7 +26,8 @@
 #colors_box .color-row {
   margin: 10px 0px;
   padding: 15px;
-  background: rgba(0, 0, 0, 0.1);
+  background: rgb(173 142 214 / 11%);
+  border-radius: 10px;
 }
 
 #sizes_box .row {
@@ -186,4 +187,11 @@ margin-bottom: 0 !important;
 }
 .badge-category{
 border-radius: 3px; padding:5px; font-size:medium;cursor:pointer; box-shadow: 0px; border:black
+}
+
+.sizes_box .left input{
+  width: 20%;
+}
+.form-actions.top{
+  text-align: center !important;
 }

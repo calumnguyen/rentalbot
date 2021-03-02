@@ -36,7 +36,7 @@ const List = {
     },
     {
       id: 4,
-      title: 'Khách Hàng',
+      title: 'Customers',
       url: 'customer',
       icons: 'fa fa-user',
       name: 'Customers',

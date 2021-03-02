@@ -445,7 +445,7 @@ class ViewProduct extends Component {
                                   to='/product/add'
                                   className='btn btn-primary pull-right'
                                 >
-                                  <i className='fa fa-plus'></i> Thêm Mẫu Hàng
+                                  <i className='fa fa-plus'></i> Add Location
                                 </Link>
                               </div>
                             </div>

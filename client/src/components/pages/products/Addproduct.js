@@ -147,7 +147,7 @@ class AddProduct extends Component {
               <input
                 type='text'
                 className='form-control mm-input '
-                placeholder='Color'
+                placeholder='Room Type'
                 value={color.colorname}
                 name='colorname'
                 required
@@ -173,7 +173,7 @@ class AddProduct extends Component {
                   onClick={() => this.addSizeRow(color._id)}
                   className='btn '
                 >
-                  <i className='fa fa-plus'></i> Thêm Size Khác
+                  <i className='fa fa-plus'></i> Add room size
                 </button>
               </div>
             </div>
@@ -234,6 +234,24 @@ class AddProduct extends Component {
               }}
             >
               <input
+                type='number'
+                name='noOfAdults'
+                className='form-control mm-input s-input'
+                placeholder='Adults'
+                onChange={(e) => this.handleChange(e, color_id, size.id)}
+                value={size.size}
+                required
+              />
+              <input
+                type='number'
+                name='noOfChildren'
+                className='form-control mm-input s-input'
+                placeholder='Children'
+                onChange={(e) => this.handleChange(e, color_id, size.id)}
+                value={size.size}
+                required
+              />
+              {/* <input
                 type='text'
                 name='size'
                 className='form-control mm-input s-input'
@@ -241,13 +259,13 @@ class AddProduct extends Component {
                 onChange={(e) => this.handleChange(e, color_id, size.id)}
                 value={size.size}
                 required
-              />
+              /> */}
 
               <input
                 type='text'
                 name='qty'
                 className='form-control mm-input s-input'
-                placeholder='Số Lượng'
+                placeholder='Quantity'
                 onKeyUp={(e) => this.props.getSize(color_id, size.id)}
                 onChange={(e) => this.handleChange(e, color_id, size.id)}
                 onBlur={(e) =>
@@ -260,7 +278,7 @@ class AddProduct extends Component {
                 type='text'
                 name='price'
                 className='form-control mm-input s-input'
-                placeholder='Giá Thuê'
+                placeholder='Per day rent'
                 onChange={(e) => this.handleChange(e, color_id, size.id)}
                 value={size.price}
                 required
@@ -451,7 +469,7 @@ class AddProduct extends Component {
                       <div className='card-header'>
                         <h4 className='form-section'>
                           {this.state.id === ''
-                            ? 'Thêm Hàng'
+                            ? 'Add Location'
                             : 'Cập Nhật Mẫu Hàng'}
                         </h4>
                       </div>
@@ -501,7 +519,7 @@ class AddProduct extends Component {
                               type='text'
                               id='projectinput1'
                               className='form-control mm-input'
-                              placeholder='Tên Sản Phẩm'
+                              placeholder='Location name'
                               value={this.state.name}
                               name='name'
                               required
@@ -513,17 +531,28 @@ class AddProduct extends Component {
                               type='text'
                               id='projectinput1'
                               className='form-control mm-input'
-                              placeholder='Tags Phân Loại'
+                              placeholder='Location Tags'
                               value={this.state.tags}
                               name='tags'
                               required
                               onChange={(e) => this.handleChangeName(e)}
                             />
                           </div>
-
+                          <div className='form-group'>
+                            <input
+                              type='text'
+                              id='projectinput1'
+                              className='form-control mm-input'
+                              placeholder='Location Address'
+                              value={this.state.address}
+                              name='address'
+                              required
+                              onChange={(e) => this.handleChangeName(e)}
+                            />
+                          </div>
                           <div className='row'>
                             <div className='col-md-12'>
-                              <h3>Màu</h3>
+                              <h3>Rooms</h3>
                             </div>
                           </div>
                           <div id='colors_box'>{this.getColors()}</div>
@@ -541,8 +570,7 @@ class AddProduct extends Component {
                                   }
                                   className='btn'
                                 >
-                                  <i className='fa fa-plus'></i> Thêm màu cho
-                                  mẫu hàng này
+                                  <i className='fa fa-plus'></i> Add Room type
                                 </button>
                               </div>
                             </div>
@@ -554,7 +582,7 @@ class AddProduct extends Component {
                                 {this.state.saving ? (
                                   <button
                                     type='button'
-                                    className='mb-2 mr-2 btn btn-raised btn-primary'
+                                    className='mb-2 mr-2 btn btn-raised btn-primary btn-lg'
                                   >
                                     <div
                                       className='spinner-grow spinner-grow-sm '
@@ -565,9 +593,9 @@ class AddProduct extends Component {
                                 ) : (
                                   <button
                                     type='submit'
-                                    className='mb-2 mr-2 btn btn-raised btn-primary'
+                                    className='mb-2 mr-2 btn btn-raised btn-primary btn-lg'
                                   >
-                                    <i className='ft-check' /> Thêm Sản Phẩm{' '}
+                                    <i className='ft-check' /> Add Location{' '}
                                   </button>
                                 )}
                               </>

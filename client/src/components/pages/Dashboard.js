@@ -437,13 +437,13 @@ class Dashboard extends Component {
                   </div>
                 </div>
 
-                {user && user.systemRole === 'Admin' ? (
+                {/* {user && user.systemRole === 'Admin' ? (
                   <>
                     {' '}
                     <div className='row mt-5 custom_row' >
                       <div className='container-fluid px-6 mx-auto grid'>
                         <div className='grid gap-6 mb-8 md:grid-cols-4 xl:grid-cols-ab'>
-                          {/* card1 */}
+                          
                           <div className='flex items-center bg-white shadow-xs card-store shop_button'>
                             <div className='gradient-light-blue-indigo rounded-full card-dashboard-store'>
                               {this.props.shop[0] &&
@@ -511,7 +511,7 @@ class Dashboard extends Component {
                   </>
                 ) : (
                     ' '
-                  )}
+                  )} */}
               </div>
             </div>
 
