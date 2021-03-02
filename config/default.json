@@ -1,6 +1,6 @@
 {
-  "mongoURI": "mongodb+srv://admin-calum:QPE9xzsiYfExnWy4@sutygon.aqp0q.mongodb.net/main?retryWrites=true&w=majority",
-  "ourMongoURI": "mongodb://default:j0HK4oADVK2VH9n1@cluster0-shard-00-00.b2se9.mongodb.net:27017,cluster0-shard-00-01.b2se9.mongodb.net:27017,cluster0-shard-00-02.b2se9.mongodb.net:27017/main?ssl=true&replicaSet=atlas-lshxba-shard-0&authSource=admin&retryWrites=true&w=majority",
+  "mongoURI": "mongodb+srv://admin:YxiueJ8sx5Vuf1l4@drops.hxdrr.mongodb.net/rentalbot?retryWrites=true&w=majority",
+  "ourMongoURI": "mongodb://localhost:27017/rentalbot",
   "jwtSecret": "sutygon-bot^#@#$",
   "jwtSecret_Customer": "sutygon-bot^#@#$_Customer",
   "cloud_name": "hiqtaqcaf",
