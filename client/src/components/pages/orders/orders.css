@@ -1,0 +1,81 @@
+.pending {
+  background-image: linear-gradient(to bottom right, #4ca1af, #c4e0e5);
+  border-radius: 20px !important;
+}
+.btn-custom {
+  width: -webkit-fill-available;
+  font-size: 1rem !important;
+}
+.justify {
+  justify-content: space-evenly;
+}
+.shadow-status {
+  box-shadow: 0px 0px 10px 2px #6161614a;
+  text-transform: capitalize !important;
+}
+.shadow-status-1 {
+  box-shadow: 0px 0px 3px 1px #6161614a;
+  text-transform: capitalize !important;
+  line-height: normal;
+}
+.lost {
+  background-image: linear-gradient(to bottom right, #603813, #b29f94);
+  border-radius: 20px !important;
+
+  color: '#fff';
+}
+.active {
+  background-image: linear-gradient(to bottom right, #3a7bd5, #3a6073);
+  border-radius: 20px !important;
+
+  color: '#fff';
+}
+.ready {
+  background-image: linear-gradient(to bottom right, #136a8a, #267871);
+  border-radius: 20px !important;
+  color: '#fff';
+}
+.past {
+  background-image: linear-gradient(to bottom right, red, yellow);
+  border-radius: 20px !important;
+
+  color: '#fff';
+}
+.alteration {
+  background-image: linear-gradient(to bottom right, red, yellow);
+  border-radius: 0 !important;
+
+  color: '#fff';
+}
+.overdue {
+  background-image: linear-gradient(to bottom right, #ff5f6d, #ffc371);
+  border-radius: 20px !important;
+
+  color: '#fff';
+}
+
+.Completed {
+  background-image: linear-gradient(to bottom right, #b24592, #f15f79);
+  border-radius: 20px !important;
+
+  color: '#fff';
+}
+.cancelled {
+  background-image: linear-gradient(to bottom right, #e96443, #904e95);
+  border-radius: 20px !important;
+
+  color: '#fff';
+}
+.font-weight-600 {
+  /* font-weight: 600; */
+}
+.font-weight-400 {
+  font-weight: 400;
+  font-size: large !important;
+}
+.bg-no {
+  background: #f5f7fa;
+}
+.pl-2px {
+  padding-left: 2px;
+}
