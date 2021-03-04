@@ -235,8 +235,15 @@ margin-bottom: 0 !important;
 .badge-secondary{
   background-color: #f57c00;
 }
+.moveinArrow{
+  font-size: 30px;
+  color: #009da0;
+}
 /* Media query for mobile */
 
+.colors_box .form-control:disabled, .form-control[readonly] {
+  background-color: #ffffff;
+}
 @media only screen and (max-width: 767px){
   .card-content {
     display: block;
@@ -258,5 +265,14 @@ margin-bottom: 0 !important;
     position: absolute;
     right: -4%;
     color: #fff !important;
+  }
+  .moveinArrow{
+    font-size: 30px;
+    color: #009da0;
+    transform: rotate(90deg);
+    margin-bottom: 20px;
+  }
+  .moveinLabel{
+    display: none;
   }
 }

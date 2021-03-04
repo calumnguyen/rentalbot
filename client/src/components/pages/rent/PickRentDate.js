@@ -45,18 +45,19 @@ class PickRentDate extends Component {
       OCAlert.alertError(`Invalid Date`, { timeOut: 3000 });
       this.focousOut(isToday);
       return;
-    } else if (rent.getTime() - new Date().getTime() > 0 || isToday === true) {
-      var threeDaysAfter =
-        new Date(rentDate).getTime() + 2 * 24 * 60 * 60 * 1000;
-      var momentthreeDaysAfter = moment(threeDaysAfter).format('DD-MM-YYYY');
-      this.state.returnDate = momentthreeDaysAfter;
-
-      this.state.m_returnDate = moment(threeDaysAfter).format('YYYY-MM-DD');
     }
+    //  else if (rent.getTime() - new Date().getTime() > 0 || isToday === true) {
+    //   var threeDaysAfter =
+    //     new Date(rentDate).getTime() + 2 * 24 * 60 * 60 * 1000;
+    //   var momentthreeDaysAfter = moment(threeDaysAfter).format('DD-MM-YYYY');
+    //   this.state.returnDate = momentthreeDaysAfter;
+
+    //   this.state.m_returnDate = moment(threeDaysAfter).format('YYYY-MM-DD');
+    // }
   };
 
-  handleChangeForDate = (date) => {
-    this.setState({ rentDate: date });
+  handleChangeForDate = (date, dateName) => {
+    this.setState({ [dateName]: date });
   };
   focousOut(value) {
     if (value === false) {
@@ -101,26 +102,17 @@ class PickRentDate extends Component {
       extraDays,
       rentDate,
       final_date,
-      m_returnDate,
+      returnDate,
       customer_id,
     } = this.state;
-    if (rentDate == '') {
-      OCAlert.alertError(`Khách hàng sẽ lấy hàng ngày nào?`, { timeOut: 5000 });
+    if (rentDate == '' || returnDate==='') {
+      OCAlert.alertError(`Please enter checkin and checkout date!`, { timeOut: 5000 });
       return;
     }
-    if (
-      extraDays != '' &&
-      extraDays != 0 &&
-      (extraDaysAmount == '' || extraDaysAmount == 0)
-    ) {
-      OCAlert.alertError(`Cần tính thêm tiền nếu gia hạn ngày thuê!`, {
-        timeOut: 5000,
-      });
-      return;
-    }
+    
     let data = {
       rentDate: rentDate,
-      returnDate: m_returnDate,
+      returnDate: returnDate,
     };
     if (extraDays && final_date && extraDaysAmount) {
       data['returnDate'] = final_date;
@@ -166,40 +158,56 @@ class PickRentDate extends Component {
                         <div className='card-body'>
                           <div id='colors_box'>
                             <div className='col-md-12'>
-                              <div className='row'>
+                              <div className='row moveinLabel'>
                                 <div className='col-md-6 text-center'>
                                   <label className='text-center' id='setName'>
-                                    Ngày Lấy Đồ
+                                    Move in Date
                                   </label>
                                 </div>
 
                                 <div className='col-md-6 text-center'>
                                   <label className='text-center' id='setName'>
-                                    Ngày Trả Đồ Mặc Định (3 ngày)
+                                    Check out Date
                                   </label>
                                 </div>
                               </div>
-
+                              
                               <div className='row justify-content-center'>
-                                <div className='col-md-6 text-center'>
+                                <div className='col-md-5 text-center'>
                                   <DatePicker
-                                    id='issueinput4'
                                     locale='vi'
                                     autoComplete={'off'}
                                     selected={this.state.rentDate}
+                                    placeholderText="move in date"
                                     className='form-control round text-center'
                                     onChange={(e) =>
-                                      this.handleChangeForDate(e)
+                                      this.handleChangeForDate(e, "rentDate")
                                     }
                                     onInput={this.rentDateValidity()}
                                     dateFormat='dd-MM-yyyy'
                                     popperPlacement='top-start'
                                   />
                                 </div>
-
-                                <div className='col-md-6 text-center'>
+                                <div className="col-md-2 text-center">
+                                  <i className="fa fa-arrow-right moveinArrow"></i>
+                                </div>
+                                <div className='col-md-5 text-center'>
+                                  <DatePicker
+                                    locale='vi'
+                                    autoComplete={'off'}
+                                    selected={this.state.returnDate}
+                                    placeholderText="check out date"
+                                    className='form-control round text-center'
+                                    onChange={(e) =>
+                                      this.handleChangeForDate(e, "returnDate")
+                                    }
+                                    onInput={this.rentDateValidity()}
+                                    dateFormat='dd-MM-yyyy'
+                                    popperPlacement='top-start'
+                                  />
+                                </div>
+                                {/* <div className='col-md-6 text-center'>
                                   <input
-                                    id='issueinput4'
                                     className='form-control round text-center'
                                     name='returnDate'
                                     style={{
@@ -217,13 +225,13 @@ class PickRentDate extends Component {
                                         : this.state.returnDate
                                     }
                                   />
-                                </div>
+                                </div> */}
                               </div>
                             </div>
                             <div>
                               <br />
 
-                              <div className='col-md-12'>
+                              {/* <div className='col-md-12'>
                                 <div className='row'>
                                   <div className='col-md-6 text-center'>
                                     <label className='text-center' id='setName'>
@@ -276,8 +284,9 @@ class PickRentDate extends Component {
                                   </div>
                                 </div>
                               </div>
+                               */}
                               <br />
-                              <div className='col-md-12'>
+                              {/* <div className='col-md-12'>
                                 <div className='row justify-content-center'>
                                   <div className='col-md-6 text-center'>
                                     <label className='text-center'>
@@ -296,9 +305,7 @@ class PickRentDate extends Component {
                                     />
                                   </div>
                                 </div>
-                              </div>
-
-                              <br />
+                              </div> */}
                               <div className='col-md-12'>
                                 <div className='row justify-content-center'>
                                   <div className='col-md-6 text-center'>

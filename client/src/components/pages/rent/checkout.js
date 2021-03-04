@@ -341,8 +341,6 @@ class Checkout extends Component {
                                   <form onSubmit={(e) => this.onScanBarcode(e)}>
                                     <input
                                       className='form-control mm-input col-md-12'
-                                      maxLength={8}
-                                      minLength={8}
                                       type='text'
                                     />
                                   </form>

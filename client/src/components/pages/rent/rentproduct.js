@@ -44,7 +44,7 @@ class RentProduct extends Component {
                       <input
                         id='name'
                         type='text'
-                        className='form-control mm-input text-center'
+                        className='form-control text-center'
                         style={{ color: '#495057' }}
                         value={customerInfo[0].name}
                         readOnly
@@ -57,7 +57,7 @@ class RentProduct extends Component {
                       <input
                         id='number'
                         type='number'
-                        className='form-control mm-input text-center'
+                        className='form-control text-center'
                         style={{ color: '#495057' }}
                         value={customerInfo[0].contactnumber}
                         readOnly
@@ -244,9 +244,8 @@ class RentProduct extends Component {
                                   name='customerNumber'
                                   type='text'
                                   placeholder='10 chữ số điện thoại'
-                                  className='form-control round'
+                                  className='form-control'
                                   id='contactnumber'
-                                  min='0'
                                   defaultValue={this.state.customerNumber}
                                   onChange={(e) => this.handleChange(e)}
                                 />

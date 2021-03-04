@@ -94,6 +94,7 @@ class RentOrder extends Component {
         extraDaysAmount: extraDaysAmount,
       });
     }
+    console.log(this.state,"---------------------")
     const orderBarcode = shortid.generate();
     this.setState({
       orderBarcode: orderBarcode,
@@ -239,7 +240,8 @@ class RentOrder extends Component {
           // looping through sizes of current color
           if (color.sizes) {
             color.sizes.forEach((size, s_index) => {
-              let size_name = size.size;
+              let adults = size.adults;
+              let children = size.children;
               let size_id = size.id;
               let price = size.price;
               let length;
@@ -258,7 +260,7 @@ class RentOrder extends Component {
                   size_id: size_id,
                   barcodeIndex: i, // will be used to identify index of barcode when changeBarcode is called
                   title: product_name,
-                  color: color_name + ' | ' + size_name,
+                  color: color_name + ' | ' + adults + ' adults | ' + children + ' children',
                   barcode: size.barcodes[i].barcode,
                   price: price,
                   productId: productId,
@@ -662,7 +664,6 @@ class RentOrder extends Component {
                                     <div className='row justify-content-center'>
                                       <div className='col-md-6 text-center'>
                                         <input
-                                          id='issueinput4'
                                           className='form-control round text-center'
                                           name='rentDate'
                                           style={{
@@ -687,7 +688,6 @@ class RentOrder extends Component {
 
                                       <div className='col-md-6 text-center'>
                                         <input
-                                          id='issueinput4'
                                           className='form-control round text-center'
                                           name='returnDate'
                                           style={{
@@ -736,7 +736,7 @@ class RentOrder extends Component {
                                         </div>
                                       </div>
                                     </div> */}
-                                    <br />
+                                    {/* <br />
                                     <div className='row'>
                                       <div className='col-md-12'>
                                         <div className='form-group'>
@@ -763,14 +763,14 @@ class RentOrder extends Component {
                                           </div>{' '}
                                         </div>
                                       </div>
-                                    </div>
+                                    </div> */}
                                     <br />
                                     <div className='row'>
                                       <div className='col-md-12'>
                                         <div className='form-group'>
                                           <div style={{ float: 'left' }}>
                                             <h4 id='padLeft'>
-                                              Tổng Tiền Chưa Thuế
+                                              Total without taxes
                                             </h4>
                                           </div>
                                           <div style={{ paddingLeft: '650px' }}>
