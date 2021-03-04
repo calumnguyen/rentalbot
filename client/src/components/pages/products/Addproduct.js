@@ -24,6 +24,7 @@ class AddProduct extends Component {
     image: '',
     name: '',
     tags: '',
+    address: '',
     color: [
       {
         _id: shortid.generate(),
@@ -60,6 +61,7 @@ class AddProduct extends Component {
           isEdit: true,
           name: product.name,
           tags: product.tags,
+          address: product.address,
           image: product.image,
           color: product.color,
           totalFromProps: test1.total,
@@ -235,20 +237,22 @@ class AddProduct extends Component {
             >
               <input
                 type='number'
-                name='noOfAdults'
+                name='adults'
                 className='form-control mm-input s-input'
                 placeholder='Adults'
+                min="0"
                 onChange={(e) => this.handleChange(e, color_id, size.id)}
-                value={size.size}
+                value={size.adults}
                 required
               />
               <input
                 type='number'
-                name='noOfChildren'
+                name='children'
+                min="0"
                 className='form-control mm-input s-input'
                 placeholder='Children'
                 onChange={(e) => this.handleChange(e, color_id, size.id)}
-                value={size.size}
+                value={size.children}
                 required
               />
               {/* <input
@@ -418,6 +422,8 @@ class AddProduct extends Component {
 
     const formData = new FormData();
     formData.append('name', state.name);
+    formData.append('address', state.address);
+    console.log(state.address,"---------")
     formData.append('productId', productId);
     if (state.image !== '') {
       formData.append('image', state.image);
@@ -517,7 +523,6 @@ class AddProduct extends Component {
                           <div className='form-group'>
                             <input
                               type='text'
-                              id='projectinput1'
                               className='form-control mm-input'
                               placeholder='Location name'
                               value={this.state.name}
@@ -529,7 +534,6 @@ class AddProduct extends Component {
                           <div className='form-group'>
                             <input
                               type='text'
-                              id='projectinput1'
                               className='form-control mm-input'
                               placeholder='Location Tags'
                               value={this.state.tags}
@@ -541,7 +545,6 @@ class AddProduct extends Component {
                           <div className='form-group'>
                             <input
                               type='text'
-                              id='projectinput1'
                               className='form-control mm-input'
                               placeholder='Location Address'
                               value={this.state.address}

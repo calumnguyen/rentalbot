@@ -234,7 +234,7 @@ router.post("/", auth, async (req, res) => {
     var page = req.body.currentPage ? parseInt(req.body.currentPage) : 1;
     var skip = (page - 1) * limit;
     const coupons = await Coupon.find(query).skip(skip).limit(limit);
-    const total = await Coupon.count(query);
+    const total = await Coupon.countDocuments(query);
     res.status(200).json({ coupons: coupons, total: total });
   } catch (err) {
     res.status(500).send("Server Error!");

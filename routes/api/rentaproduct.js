@@ -86,14 +86,14 @@ router.post(
 router.get("/countOrders", auth, async (req, res) => {
   try {
     const today = moment().startOf("day");
-    const today_order = await RentedProduct.count({
+    const today_order = await RentedProduct.countDocuments({
       status: "pending",
       createdAt: {
         $gte: today.toDate(),
         $lte: moment(today).endOf("day").toDate(),
       },
     });
-    const return_today = await RentedProduct.count({
+    const return_today = await RentedProduct.countDocuments({
       status: "active",
       returnDate: {
         $gte: today.toDate(),
@@ -101,7 +101,7 @@ router.get("/countOrders", auth, async (req, res) => {
       },
     });
 
-    const pickup_today = await RentedProduct.count({
+    const pickup_today = await RentedProduct.countDocuments({
       $or: [{ status: "pending" }, { status: "ready" }],
       rentDate: {
         $gte: today.toDate(),
@@ -109,13 +109,13 @@ router.get("/countOrders", auth, async (req, res) => {
       },
     });
 
-    const overdue_today = await RentedProduct.count({
+    const overdue_today = await RentedProduct.countDocuments({
       status: "active",
       returnDate: {
         $lte: today.toDate(),
       },
     });
-    const alterations = await RentedProduct.count({
+    const alterations = await RentedProduct.countDocuments({
       status: "alteration",
     });
 

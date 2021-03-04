@@ -185,13 +185,78 @@ margin-bottom: 0 !important;
   cursor: pointer;
   background-color: "red";
 }
-.badge-category{
-border-radius: 3px; padding:5px; font-size:medium;cursor:pointer; box-shadow: 0px; border:black
+.badge-category {
+  border-radius: 3px;
+  padding: 5px;
+  font-size: medium;
+  cursor: pointer;
+  box-shadow: 0px;
+  border: black;
 }
 
-.sizes_box .left input{
+.sizes_box .left input {
   width: 20%;
 }
-.form-actions.top{
+.form-actions.top {
   text-align: center !important;
+}
+
+/* CSS for new layout of table */
+.card-content {
+  display: flex;
+  flex-direction: row;
+}
+
+.product_card .bdg {
+  top: 1%;
+  transform: rotate(45deg);
+  position: absolute;
+  right: -1%;
+  color: #fff !important;
+}
+.product_card .textbbody{
+  width: 40%;
+}
+.product_card .card-footer{
+  width: 20%;
+}
+.product_card .imeg_container{
+  width: 40%;
+  background-color: white;
+}
+
+/* center align pagination */
+.pagination >div{
+  margin: 0 auto;
+}
+.card-footer{
+  border-top: 0px;
+}
+.badge-secondary{
+  background-color: #f57c00;
+}
+/* Media query for mobile */
+
+@media only screen and (max-width: 767px){
+  .card-content {
+    display: block;
+    flex-direction: unset;
+  }
+  .product_card .textbbody{
+    width: 100%;
+  }
+  .product_card .card-footer{
+    width: 100%;
+  }
+  .product_card .imeg_container{
+    width: 100%;
+    background-color: white;
+  }
+  .product_card .bdg {
+    top: 1%;
+    transform: rotate(45deg);
+    position: absolute;
+    right: -4%;
+    color: #fff !important;
+  }
 }

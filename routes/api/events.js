@@ -287,4 +287,26 @@ router.get("/:id", auth, async (req, res) => {
   }
 });
 
+
+// hide events
+router.post("/hideevent/:id", auth, async (req, res) => {
+  try {
+    const event = await Events.findByIdAndUpdate(req.params.id,{removed:true})
+    if (!event) {
+      return res.status(404).json({ msg: "No Event found" });
+    }
+
+    res.json(event);
+  } catch (err) {
+    console.error(err.message);
+    // Check if id is not valid
+    if (err.kind === "ObjectId") {
+      return res.status(404).json({ msg: "No Event found" });
+    }
+    res
+      .status(500)
+      .json({ errors: [{ msg: "Server Error: Something went wrong" }] });
+  }
+});
+
 module.exports = router;

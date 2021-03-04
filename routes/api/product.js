@@ -53,6 +53,7 @@ router.post(
           name: body.name,
           productId: body.productId,
           tags: body.tags,
+          address: body.address,
           image: result.secure_url,
           color: JSON.parse(req.body.color),
         };
@@ -73,7 +74,6 @@ router.post(
 router.post("/barcode_update/:id", auth, async (req, res) => {
   try {
     const body = JSON.parse(JSON.stringify(req.body)); // req.body = [Object: null prototype] { title: 'product' }
-
     await Product.updateOne(
       { _id: req.params.id },
       {
@@ -90,6 +90,7 @@ router.post("/barcode_update/:id", auth, async (req, res) => {
       .json({ errors: [{ msg: "Server Error: Something went wrong" }] });
   }
 });
+
 // @route  POST api/products/index_update/:id
 // @desc   Update a Product after renting
 // @access Private
@@ -418,6 +419,7 @@ router.post("/:id", auth, upload.single("image"), async (req, res) => {
             name: body.name,
             tags: body.tags,
             image: body.image,
+            address: body.address,
             color: JSON.parse(body.color),
           },
         }
@@ -433,6 +435,7 @@ router.post("/:id", auth, upload.single("image"), async (req, res) => {
               name: body.name,
               tags: body.tags,
               image: result.secure_url,
+              address: body.address,
               color: JSON.parse(body.color),
             },
           }
@@ -466,7 +469,7 @@ router.post(
         .sort({ date: -1 })
         .skip(skip)
         .limit(pagination_limit);
-      const total = await Product.count({});
+      const total = await Product.countDocuments({});
       res.status(200).json({ products: products, total: total });
     } catch (err) {
       console.log(err);

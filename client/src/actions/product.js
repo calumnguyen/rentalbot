@@ -8,7 +8,9 @@ import {
   PRODUCTS_ERROR,
   PRODUCTS_LOADING,
   PRODUCT_DELETED,
-  PRODUCT_UPDATED,GET_QTY,IMAGES_SAVED
+  PRODUCT_UPDATED,
+  GET_QTY,
+  IMAGES_SAVED,
 } from "./types";
 import { setAlert } from "./alert";
 
@@ -45,7 +47,9 @@ export const getAllProducts = (page) => async (dispatch) => {
   dispatch({ type: PRODUCT_LOADING });
   try {
     const currentPage = page || 1;
-    const res = await axios.post(`/api/products/`,{currentPage:currentPage});
+    const res = await axios.post(`/api/products/`, {
+      currentPage: currentPage,
+    });
     dispatch({
       type: GET_PRODUCTS,
       payload: {
@@ -134,8 +138,7 @@ export const getProduct = (name) => async (dispatch) => {
   }
 };
 
-
-export const getSize = (color_id,size_id) => async (dispatch) => {
+export const getSize = (color_id, size_id) => async (dispatch) => {
   dispatch({ type: PRODUCTS_LOADING });
 
   try {
@@ -151,7 +154,6 @@ export const getSize = (color_id,size_id) => async (dispatch) => {
     });
   }
 };
-
 
 export const getProductById = (id) => async (dispatch) => {
   dispatch({ type: PRODUCTS_LOADING });
@@ -226,7 +228,6 @@ export const barcodeUpdateProduct = (product, id) => async (dispatch) => {
   dispatch({ type: PRODUCTS_LOADING });
 
   try {
-    // const res = await axios.post(`/api/products/${id}`,product, config);
     const res = await axios.post(`/api/products/barcode_update/${id}`, product);
 
     dispatch({
@@ -329,9 +330,10 @@ export const deleteProduct = (id) => async (dispatch) => {
 export const changeItemStatus = (status, barcode) => async (dispatch) => {
   dispatch({ type: PRODUCTS_LOADING });
 
-
   try {
-    const res = await axios.post(`/api/products/${barcode}/${status}/status_update`);
+    const res = await axios.post(
+      `/api/products/${barcode}/${status}/status_update`
+    );
 
     dispatch({
       type: PRODUCT_UPDATED,
@@ -357,7 +359,11 @@ export const updateImages = (body, barcode) => async (dispatch) => {
     },
   };
   try {
-    const res = await axios.post(`/api/products/${barcode}/image_update`,body,config);
+    const res = await axios.post(
+      `/api/products/${barcode}/image_update`,
+      body,
+      config
+    );
 
     dispatch({
       type: IMAGES_SAVED,
@@ -365,7 +371,6 @@ export const updateImages = (body, barcode) => async (dispatch) => {
     });
 
     dispatch(setAlert(res.data.msg, "success"));
-
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
@@ -382,7 +387,9 @@ export const changeItemQuality = (quality, barcode) => async (dispatch) => {
   dispatch({ type: PRODUCTS_LOADING });
 
   try {
-    const res = await axios.post(`/api/products/${barcode}/${quality}/quality_update`);
+    const res = await axios.post(
+      `/api/products/${barcode}/${quality}/quality_update`
+    );
     dispatch({
       type: PRODUCT_UPDATED,
       payload: res.data,
@@ -404,7 +411,10 @@ export const getFilteredProducts = (reqObj) => async (dispatch) => {
   dispatch({ type: PRODUCT_LOADING });
   try {
     const currentPage = reqObj.page || 1;
-    const res = await axios.post(`/api/products/filter/filter_products`,{...reqObj, currentPage:currentPage});
+    const res = await axios.post(`/api/products/filter/filter_products`, {
+      ...reqObj,
+      currentPage: currentPage,
+    });
     dispatch({
       type: GET_PRODUCTS,
       payload: {

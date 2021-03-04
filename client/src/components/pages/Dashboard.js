@@ -11,7 +11,7 @@ import {
 } from '../../actions/rentproduct';
 import { getAllProducts } from '../../actions/product';
 import { getUser, updateEvents, getremoveEvents } from '../../actions/user';
-import { getAllEvents, getAllBirthdayEvents } from '../../actions/events';
+import { getAllEvents, getAllBirthdayEvents,removeEventStatus } from '../../actions/events';
 import { changeShopStatus, getShop } from '../../actions/dashboard';
 import * as moment from 'moment';
 import '../../login.css';
@@ -41,19 +41,19 @@ class Dashboard extends Component {
     this.setState({ removedevents: r_events });
     await this.getEvents();
   }
-  async componentDidUpdate(prevProps, prevState) {
-    const { auth } = this.props;
-    const { user } = auth && auth;
-    /* if (user) {
-      await this.props.getremoveEvents(user._id);
-    }
-    if (prevProps.r_events != this.props.r_events) {
-      const { r_events } = this.props;
-      await this.getEvents();
+  // async componentDidUpdate(prevProps, prevState) {
+  //   const { auth } = this.props;
+  //   const { user } = auth && auth;
+  //   if (user) {
+  //     await this.props.getremoveEvents(user._id);
+  //   }
+  //   if (prevProps.r_events != this.props.r_events) {
+  //     const { r_events } = this.props;
+  //     await this.getEvents();
 
-      this.setState({ removedevents: r_events });
-    } */
-  }
+  //     this.setState({ removedevents: r_events });
+  //   }
+  // }
   async changeShopStatus(status) {
     await this.props.changeShopStatus(status);
     await this.props.getShop();
@@ -71,13 +71,15 @@ class Dashboard extends Component {
   };
 
   getfilteredEvents = (currenWeekEvents) => {
-    /* const { r_events } = this.props;
-    const { remove_arr } = r_events && r_events;
-    var filteredEvents =
-      currenWeekEvents &&
-      currenWeekEvents.filter((a) => remove_arr && !remove_arr.includes(a._id));
+    // const { r_events } = this.props;
+    // const { remove_arr } = r_events && r_events;
+    // var filteredEvents =
+    //   currenWeekEvents &&
+    //   currenWeekEvents.filter((a) => remove_arr && !remove_arr.includes(a._id));
+var filteredEvents =
+			currenWeekEvents && currenWeekEvents.filter((a) => a.removed == false);
 
-    return filteredEvents; */
+    return filteredEvents;
   };
   getcurrentdaysEvents = (updatedEvents, currentdate) => {
     var currenDayEvents =
@@ -163,10 +165,12 @@ class Dashboard extends Component {
       updatedEvents,
       currentdate
     );
+     const filteredcurrenDaysEvents= this.getfilteredEvents(currenDaysEvents);
+
     const filteredEvents = this.getfilteredEvents(currenWeekEvents);
 
     var events_arr = events &&
-      filteredEvents && [...filteredEvents, ...currenDaysEvents];
+      filteredEvents && [...filteredEvents, ...filteredcurrenDaysEvents];
 
     this.setState({
       currenWeekEvents: events_arr,
@@ -239,7 +243,8 @@ class Dashboard extends Component {
 
   hideAlert = async (e, id, eventID) => {
     e.preventDefault();
-    await this.props.updateEvents(id, eventID);
+    await this.props.removeEventStatus(eventID)
+    // await this.props.updateEvents(id, eventID);
   };
   getTodaysAppointment = () => {
     // e.preventDefault()
@@ -437,13 +442,13 @@ class Dashboard extends Component {
                   </div>
                 </div>
 
-                {/* {user && user.systemRole === 'Admin' ? (
+                {user && user.systemRole === 'Admin' ? (
                   <>
                     {' '}
                     <div className='row mt-5 custom_row' >
                       <div className='container-fluid px-6 mx-auto grid'>
                         <div className='grid gap-6 mb-8 md:grid-cols-4 xl:grid-cols-ab'>
-                          
+                          {/* card1 */}
                           <div className='flex items-center bg-white shadow-xs card-store shop_button'>
                             <div className='gradient-light-blue-indigo rounded-full card-dashboard-store'>
                               {this.props.shop[0] &&
@@ -511,7 +516,7 @@ class Dashboard extends Component {
                   </>
                 ) : (
                     ' '
-                  )} */}
+                  )}
               </div>
             </div>
 
@@ -579,5 +584,6 @@ export default connect(mapStateToProps, {
   getremoveEvents,
   getDashboardCountOrders,
   // changeStatus,
-  // getAllDashboardEvents
+  // getAllDashboardEvents,
+  removeEventStatus
 })(Dashboard);

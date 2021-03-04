@@ -111,7 +111,8 @@ class Barcode extends Component {
           // looping through sizes of current color
           if (color.sizes) {
             color.sizes.forEach((size, s_index) => {
-              let size_name = size.size;
+              let adults = (size.adults)?size.adults:0;
+              let children = (size.children)?size.children:0;
               let size_id = size.id;
 
               let length;
@@ -142,7 +143,7 @@ class Barcode extends Component {
                   size_id: size_id,
                   short_product_id: product.productId,
                   barcodeIndex: i, // will be used to identify index of barcode when changeBarcode is called
-                  title: product_name + ' | ' + color_name + ' | ' + size_name,
+                  title: product_name + ' | ' + color_name + ' | ' + adults + ' adults | ' + children + ' Children',
                   barcodes: size.barcodes ? size.barcodes : [],
                 };
                 rows.push(row);
@@ -189,39 +190,6 @@ class Barcode extends Component {
             ) : (
               ''
             ),
-          changeBarcode:
-            this.state.dataType === 'without_barcode' ? (
-              <button
-                type='button'
-                className='btn btn-raised btn-primary round btn-min-width mr-1 mb-1'
-                onClick={(e) =>
-                  this.genPrintRandBarcode(
-                    e,
-                    product.product_id,
-                    product.color_id,
-                    product.size_id
-                  )
-                }
-              >
-                Tạo một mã đồ ngẫu nhiên
-              </button>
-            ) : (
-              <button
-                type='button'
-                className='btn btn-raised btn-primary round btn-min-width mr-1 mb-1'
-                onClick={(e) =>
-                  this.changeBarcode(
-                    e,
-                    product.product_id,
-                    product.color_id,
-                    product.size_id,
-                    product.barcodeIndex
-                  )
-                }
-              >
-                Đổi Mã
-              </button>
-            ),
           scanBarcode:
             this.state.dataType === 'without_barcode' ? (
               <form
@@ -237,24 +205,10 @@ class Barcode extends Component {
                 <input
                   type='text'
                   className='form-control mm-input'
-                  placeholder={'Nhập mã 8 chữ số'}
-                  maxLength={8}
-                  minLength={8}
+                  placeholder={'PHONG0'}
                 />
               </form>
-            ) : (
-              <button
-                type='button'
-                className='btn btn-raised btn-primary round btn-min-width mr-1 mb-1'
-                onClick={(e) =>
-                  this.printBarcode(
-                    product.barcodes[product.barcodeIndex].barcode
-                  )
-                }
-              >
-                In Mã
-              </button>
-            ),
+            ) : null,
           deleteItem:
             this.state.dataType === 'without_barcode' ? (
               <button
@@ -311,17 +265,19 @@ class Barcode extends Component {
               sort: true,
             }
           : '',
-        {
-          dataField: 'changeBarcode',
-          text:
-            this.state.dataType === 'with_barcode' ? 'Change Barcode' : 'In Mã',
-          sort: true,
-        },
-        {
-          dataField: 'scanBarcode',
-          text: 'Nhập Mã',
-          sort: true,
-        },
+        // {
+        //   dataField: 'changeBarcode',
+        //   text:
+        //     this.state.dataType === 'with_barcode' ? 'Change Barcode' : 'In Mã',
+        //   sort: true,
+        // },
+        this.state.dataType === 'without_barcode'
+          ? {
+            dataField: 'scanBarcode',
+            text: 'Nhập Mã',
+            sort: true,
+          }
+          : '',
         {
           dataField: 'deleteItem',
           text: 'Xoá Đồ',
@@ -394,6 +350,9 @@ class Barcode extends Component {
     const barcodesData = this.getBarcodeData(products);
     // get barcode input value
     let barcode = e.target[0].value;
+    if(barcode.length===0){
+      barcode = "PHONG0";
+    }
     const isInclude = barcodesData.includes(barcode);
     if (isInclude === true) {
       // error message
@@ -410,7 +369,7 @@ class Barcode extends Component {
       e.target[0].value = '';
       this.saveBarCode(barcode, product_id, color_id, size_id);
       // success message
-      OCAlert.alertSuccess('Đã cập nhật mã đồ cho sản phẩm này');
+      //OCAlert.alertSuccess('Đã cập nhật mã đồ cho sản phẩm này');
     }
   };
 
