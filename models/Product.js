@@ -38,7 +38,7 @@ const ProductSchema = new mongoose.Schema(
             children: String,
             barcodes: [
               {
-                barcode: Number,
+                barcode: String,
                 isLost: { type: Boolean, default: false },
                 isRented: { type: Boolean, default: false },
                 quality: {

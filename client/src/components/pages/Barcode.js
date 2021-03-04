@@ -55,9 +55,7 @@ class Barcode extends Component {
         prodId: !this.state.prodId
           ? this.state.prodId
           : Number(this.state.prodId),
-        barcodeId: !this.state.barcodeId
-          ? this.state.barcodeId
-          : Number(this.state.barcodeId),
+        barcodeId: this.state.barcodeId,
         tags: this.state.tags,
         prodName: this.state.prodName,
       };
@@ -689,7 +687,7 @@ class Barcode extends Component {
                             <div className='form-group'>
                               <input
                                 name='barcodeId'
-                                type='number'
+                                type='text'
                                 placeholder='Mã Sản Phẩm'
                                 className='form-control'
                                 value={this.state.barcodeId}
