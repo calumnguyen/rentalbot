@@ -352,23 +352,25 @@ class Barcode extends Component {
       barcode = "PHONG0";
     }
     const isInclude = barcodesData.includes(barcode);
-    if (isInclude === true) {
-      // error message
-      OCAlert.alertError(
-        'Mã đồ này đã ở trong hệ thống. Mỗi mã đồ chỉ có thể được sử dụng một lần.',
-        {
-          timeOut: 5000,
-        }
-      );
-      return;
-    }
-    // empty barcode input
-    else if (isInclude === false) {
-      e.target[0].value = '';
-      this.saveBarCode(barcode, product_id, color_id, size_id);
-      // success message
-      //OCAlert.alertSuccess('Đã cập nhật mã đồ cho sản phẩm này');
-    }
+    // if (isInclude === true) {
+    //   // error message
+    //   OCAlert.alertError(
+    //     'Mã đồ này đã ở trong hệ thống. Mỗi mã đồ chỉ có thể được sử dụng một lần.',
+    //     {
+    //       timeOut: 5000,
+    //     }
+    //   );
+    //   return;
+    // }
+    // // empty barcode input
+    // else if (isInclude === false) {
+    //   e.target[0].value = '';
+    //   this.saveBarCode(barcode, product_id, color_id, size_id);
+    //   // success message
+    //   //OCAlert.alertSuccess('Đã cập nhật mã đồ cho sản phẩm này');
+    // }
+    e.target[0].value = '';
+    this.saveBarCode(barcode, product_id, color_id, size_id);
   };
 
   // generate and print random bar code
