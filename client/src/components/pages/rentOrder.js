@@ -666,6 +666,7 @@ class RentOrder extends Component {
                                         state: {
                                           customer: this.state.customer_id,
                                           barcode: this.state.barcode_Array,
+                                          data: this.props.location.state.data
                                         },
                                       }}
                                       className="btn "

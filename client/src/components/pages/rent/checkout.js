@@ -51,11 +51,25 @@ class Checkout extends Component {
         myRentDate: moment(state.data.rentDate).format("DD-MM-YYYY"),
         barcode: state.barcode ? state.barcode : [],
       });
+      if(state.barcode && state.barcode.length>0){
+        let products = this.props.products;
+        let sortedProducts = this.getSortedData(products);
+        let newmp = new Map();
+        sortedProducts.forEach((product, p_idx) => {
+          let mp = new Map([[product.prodUniqueId, false]]);
+          newmp = new Map([...newmp, ...mp]);
+        });
+        state.barcode.forEach((barcodeObj,bar_idx)=> {
+          newmp.set(barcodeObj.barcode, true);
+          if(bar_idx+1===state.barcode.length){
+            this.setState({ allRoomsCheck: newmp });
+          }
+        })
+      }
     }
     if (this.state.customer_id) {
       await this.props.getCustomer(this.state.customer_id);
     }
-    this.clearChecks();
   }
   clearChecks = () => {
     let newmp = new Map();
@@ -294,69 +308,24 @@ class Checkout extends Component {
     return rows;
   };
 
-  onScanBarcode = async (e, smallProdId) => {
+  onScanBarcode = async (e, prodUniqueId) => {
     // e.preventDefault();
     let isChecked = e.target.checked;
     const { products } = this.props;
     if (products) {
-      const sortedArray = this.getSortedData(products);
       //sorted array is list of all segreggated products by roomno
       const { barcode } = this.state;
-      let m_barcode = [];
-      barcode.forEach((barcode, b_index) => {
-        m_barcode.push(barcode.smallProdId);
-      });
-      let foundBarcode = sortedArray.find((location)=>location.smallProdId===smallProdId);
       if(isChecked===true){
         barcode.push({
           id: shortid.generate(),
-          barcode: smallProdId
+          barcode: prodUniqueId
         });
         this.setState({barcode})
       } else{
         let barcodes = [...this.state.barcode];
-        barcodes = barcodes.filter((location)=>location.smallProdId===smallProdId);
+        barcodes = barcodes.filter((location)=>location.barcode!==prodUniqueId);
         this.setState({barcode: barcodes});
       }
-      // if (barcodeArry.isRented && barcodeArry.isRented === true) {
-      //   OCAlert.alertError(
-      //     `This barcode is already Rented. Please try again!`,
-      //     { timeOut: 3000 }
-      //   );
-      //   return;
-      // }
-      // if (barcodeArry.isLost === true) {
-      //   OCAlert.alertError(`This barcode is Lost. Please try again!`, {
-      //     timeOut: 3000,
-      //   });
-      //   return;
-      // }
-      this.setState({ isLoading: true });
-      // const result = await Axios.get(`/api/rentedproducts/checkBarcode/${bc}`);
-      // if (result.data == null) {
-      //   this.setState({ isLoading: false });
-      //   barcode.push({
-      //     id: shortid.generate(),
-      //     barcode: bc.trim(),
-      //   });
-      //   this.setState({ barcode });
-      // } else {
-      //   this.setState({ isLoading: false, getOrder: result.data });
-      //   const { returnDate } = result.data;
-      //   if (this.compareDateOfOrder(returnDate, bc)) {
-      //     barcode.push({
-      //       id: shortid.generate(),
-      //       barcode: bc.trim(),
-      //     });
-      //     this.setState({ barcode });
-      //   }
-      // }
-      // barcode.push({
-      //   id: shortid.generate(),
-      //   barcode: bc.trim(),
-      // });
-      // this.setState({ barcode });
-      this.setState({ isLoading: false });
     }
   };
   removeBarcodeRow = (id) => {
@@ -520,7 +489,7 @@ class Checkout extends Component {
                                 <div className="row text-center ">
                                   <div className="col-md-12 btn-cont">
                                     <div className="form-group">
-                                      {!!this.state.barcode.length ? (
+                                      {(this.state.barcode && this.state.barcode.length>0) ? (
                                         <Link
                                           to={{
                                             pathname: "/rentorder",
