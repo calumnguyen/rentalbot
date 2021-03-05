@@ -154,10 +154,10 @@ class Prepaid5 extends Component {
     let { product_Array } = this.state;
     return product_Array.map((product, b_index) => (
       <tr>
-        <td className='text-center'>{product[0].barcode}</td>
-        <td className='text-center'>{product[0].title}</td>
-        <td className='text-center'>{product[0].color}</td>
-        <td className='text-center'>{product[0].price}</td>
+        <td className='text-center'>{product.smallProdId}</td>
+        <td className='text-center'>{product.barcode}</td>
+        <td className='text-center'>{product.title}</td>
+        <td className='text-center'>{product.price}</td>
       </tr>
     ));
   }
@@ -352,7 +352,14 @@ class Prepaid5 extends Component {
           </h1>
 
           <table style={{ width: '100%' }} cellpadding='10'>
-            <thead></thead>
+            <thead>
+            <tr>
+              <td className='text-center'>Location ID</td>
+              <td className='text-center'>Room No</td>
+              <td className='text-center'>Room Details</td>
+              <td className='text-center'>Room Price</td>
+            </tr>
+            </thead>
             <tbody>{this.getInvoiceBarcodeRecord()}</tbody>
           </table>
           <hr />
