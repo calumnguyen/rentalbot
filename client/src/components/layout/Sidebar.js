@@ -33,6 +33,7 @@ class Sidebar extends Component {
 
   handleClick = (name) => {
     this.props.changePage(name);
+    this.props.setToggleStatus(false);
   };
   render() {
     const { user } = this.props.auth;
