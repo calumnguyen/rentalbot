@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { logout } from '../../actions/auth';
 import loadjs from 'loadjs';
 import { Link } from 'react-router-dom';
+import { setToggleStatus } from "../../actions/custom";
+
 import {
   ButtonDropdown,
   DropdownToggle,
@@ -48,12 +50,23 @@ class Header extends Component {
       dropdownOpen: !this.state.dropdownOpen,
     });
   };
+  toggleSideBar = (e) => {
+    this.props.setToggleStatus(e.target.checked);
+  }
 
   render() {
     const { user } = this.props.auth;
 
     return (
       <>
+        <div className="menuBarToggleButton">
+          <input name="toggleSideBarStatus" checked={this.props.toggleBarStatus} type="checkbox" id="menuToggler" className="input-toggler" onClick={(e) => this.toggleSideBar(e)} />
+          <label htmlFor="menuToggler" className="menu-toggler">
+            <span className="menu-toggler__line"></span>
+            <span className="menu-toggler__line"></span>
+            <span className="menu-toggler__line"></span>
+          </label>
+        </div>
         {user && user.avatar ? (
           <ButtonDropdown
             isOpen={this.state.dropdownOpen}
@@ -102,11 +115,13 @@ class Header extends Component {
 
 Header.propTypes = {
   logout: PropTypes.func.isRequired,
+  setToggleStatus: PropTypes.func.isRequired,
   auth: PropTypes.object,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
+  toggleBarStatus: state.custom.toggleStatus
 });
 
-export default connect(mapStateToProps, { logout })(Header);
+export default connect(mapStateToProps, { logout, setToggleStatus })(Header);

@@ -280,11 +280,7 @@ class ViewProduct extends Component {
       if (formated_products) {
         if (formated_products.length === 0) {
           return (
-            <tr>
-              <td colSpan={10} className="text-center">
-                Chưa có mẫu hàng nào
-              </td>
-            </tr>
+            <p className="mx-auto mt-2 noProducts">Chưa có mẫu hàng nào</p>
           );
         }
         return formated_products.map((product, i) => (

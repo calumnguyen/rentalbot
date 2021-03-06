@@ -41,6 +41,9 @@ class RentProduct extends Component {
                 <div id='sizes_box'>
                   <div className='row'>
                     <div className='left'>
+                      <label>
+                        Customer Name
+                      </label>
                       <input
                         id='name'
                         type='text'
@@ -54,6 +57,9 @@ class RentProduct extends Component {
                   <br />
                   <div className='row'>
                     <div className='left'>
+                      <label>
+                        Customer Contact No.
+                      </label>
                       <input
                         id='number'
                         type='number'
@@ -67,14 +73,17 @@ class RentProduct extends Component {
                   <br />
                   <div className='row'>
                     <div className='left'>
-                      <textarea
+                      <label>
+                        Customer Address
+                      </label>
+                      <input
                         id='address'
                         type='text'
-                        className='form-control mm-input text-center'
+                        className='form-control text-center'
                         style={{ color: '#495057' }}
                         value={customerInfo[0].address}
                         readOnly
-                      ></textarea>
+                      ></input>
                     </div>
                   </div>
                 </div>
@@ -90,14 +99,14 @@ class RentProduct extends Component {
                       },
                     }}
                     type='button'
-                    className='btn btn-raised btn-primary round btn-min-width mr-1 mb-1'
+                    className='btn btn-raised btn-primary btn-min-width mr-1 mb-1'
                     id='btnSize2'
                   >
                     <i className='ft-check'></i> Chọn Ngày Thuê
                   </Link>
                   <button
                     type='button'
-                    className='btn btn-raised btn-primary round btn-min-width mr-1 mb-1'
+                    className='btn btn-raised btn-primary btn-min-width mr-1 mb-1'
                     onClick={(e) => this.tryAgain(e)}
                     id='btnSize'
                   >
@@ -239,21 +248,24 @@ class RentProduct extends Component {
                               <h3>
                                 Nhập số điện thoại khách hàng để tìm khách
                               </h3>
-                              <div className='position-relative has-icon-right'>
-                                <input
-                                  name='customerNumber'
-                                  type='text'
-                                  placeholder='10 chữ số điện thoại'
-                                  className='form-control'
-                                  id='contactnumber'
-                                  defaultValue={this.state.customerNumber}
-                                  onChange={(e) => this.handleChange(e)}
-                                />
-                                <div className='form-control-position'>
+                              <div className='position-relative has-icon-right d-flex'>
+                                <div>
+                                  <input
+                                    name='customerNumber'
+                                    type='text'
+                                    placeholder='10 chữ số điện thoại'
+                                    className='form-control border-radius-0'
+                                    id='contactnumber'
+                                    defaultValue={this.state.customerNumber}
+                                    onChange={(e) => this.handleChange(e)}
+                                  />
+                                </div>
+                                
+                                <div className=''>
                                   <button
                                     type='submit'
-                                    className='mb-2 mr-2 btn ft-search'
-                                  ></button>
+                                    className='mb-2 mr-2 btn ft-search btn-primary border-radius-0 search-button'
+                                  >{" "}Search</button>
                                 </div>
                               </div>
                             </div>

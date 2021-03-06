@@ -171,3 +171,6 @@ export const GET_COUPON = 'GET_COUPON'
 export const COUPON_DELETED = 'COUPON_DELETED'
 export const COUPON_SAVED = 'COUPON_SAVED'
 export const COUPON_UPDATED = 'COUPON_UPDATED'
+
+//Custom Actions
+export const UPDATE_TOGGLE_STATUS = 'UPDATE_TOGGLE_STATUS';
