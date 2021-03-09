@@ -274,7 +274,7 @@ margin-bottom: 0 !important;
   display: block;
   width: var(--toggler-size);
   height: var(--toggler-size);
-  position: fixed;
+  position: absolute;
   top: 23px;
   left: 20px;
   cursor: pointer;
